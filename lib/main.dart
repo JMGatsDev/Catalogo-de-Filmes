@@ -1,3 +1,5 @@
+import 'package:app_filmes/application/bindings/application_bindings.dart';
+import 'package:app_filmes/modules/login/login_module.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'firebase_options.dart';
@@ -5,7 +7,7 @@ import 'package:app_filmes/modules/home/home_module.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -17,7 +19,6 @@ void main() async{
   //   minimumFetchInterval: const Duration(hours: 1),
   // ));
   runApp(const MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      getPages: [...HomeModule().routers],
+      initialBinding: ApplicationBindigs(),
+      getPages: [...HomeModule().routers, ...LoginModule().routers],
     );
   }
 }
