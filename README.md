@@ -1,7 +1,6 @@
 # app_filmes
 
-App De catálogo de filmes
-
+Aplicativo de catálogo de filmes para android
 ## Getting Started
 
 This project is a starting point for a Flutter application.
