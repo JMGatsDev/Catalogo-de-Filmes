@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class HomeController extends GetxController{
+class SplashController extends GetxController{
 @override
   void onReady() {
     super.onReady();

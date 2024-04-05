@@ -1,17 +1,17 @@
-import 'package:app_filmes/modules/home/homer_controller.dart';
+import 'package:app_filmes/modules/splash/splash_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({super.key});
+class SplashPage extends StatefulWidget {
+  SplashPage({super.key});
 
-  var controller = Get.put(HomeController());
+  var controller = Get.put(SplashController());
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -29,7 +29,6 @@ class LoginController extends GetxController with LoaderMixin, MessagesMixin {
             title: 'Sucesso', message: 'Login Realizado com sucesso'),
       );
     } catch (e,s){
-      print(e);
       print(s);
       loading(false);
       MessageModel.error(
