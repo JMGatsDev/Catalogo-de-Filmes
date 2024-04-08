@@ -1,4 +1,6 @@
 import 'package:app_filmes/application/bindings/application_bindings.dart';
+import 'package:app_filmes/application/ui/filmes_app_ui_config.dart';
+import 'package:app_filmes/modules/home/home_module.dart';
 import 'package:app_filmes/modules/login/login_module.dart';
 import 'package:app_filmes/modules/splash/splash_module.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,10 +16,6 @@ void main() async {
   );
   final remoteConfig = FirebaseRemoteConfig.instance;
   remoteConfig.fetchAndActivate();
-  // await remoteConfig.setConfigSettings(RemoteConfigSettings(
-  //   fetchTimeout: const Duration(minutes: 1),
-  //   minimumFetchInterval: const Duration(hours: 1),
-  // ));
   runApp(const MyApp());
 }
 
@@ -27,8 +25,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+
+      title: FilmesAllUiConfig.title,
+      theme: FilmesAllUiConfig.theme,
       initialBinding: ApplicationBindigs(),
-      getPages: [...SplashModule().routers, ...LoginModule().routers],
+      getPages: [
+        ...SplashModule().routers,
+        ...LoginModule().routers,
+        ...HomeModule().routers
+      ],
     );
   }
 }

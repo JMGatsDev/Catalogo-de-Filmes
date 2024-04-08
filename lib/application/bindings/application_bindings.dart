@@ -1,3 +1,4 @@
+import 'package:app_filmes/application/auth/auth_service.dart';
 import 'package:app_filmes/repository/login/login_repository.dart';
 import 'package:app_filmes/repository/login/login_repository_impl.dart';
 import 'package:app_filmes/services/login/login_service.dart';
@@ -9,9 +10,9 @@ class ApplicationBindigs implements Bindings {
   void dependencies() {
     Get.lazyPut<LoginRepository>(() => LoginRepositoryImpl(), fenix: true);
     Get.lazyPut<LoginService>(
-        () => LoginServiceImpl(
-              loginRepository: Get.find(),
-            ),
+        () => LoginServiceImpl(loginRepository: Get.find()),
         fenix: true);
+    //chama a verificação de usuario
+    Get.put(AuthService()).init();
   }
 }
