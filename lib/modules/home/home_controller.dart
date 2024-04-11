@@ -1,5 +1,4 @@
 import 'package:app_filmes/services/login/login_service.dart';
-import 'package:app_filmes/services/login/login_service_impl.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -20,7 +19,7 @@ class HomeController extends GetxController {
   void goToPage(int page) {
     _pageIndex(page);
     if (page == INDEX_PAGE_EXIT) {
-      _loginService.logout;
+      _loginService.logout();
     } else {
       Get.offNamed(_pages[page], id: NAVIGATOR_KEY);//navegando entre as paginas
 
