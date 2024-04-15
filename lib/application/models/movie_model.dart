@@ -29,11 +29,11 @@ class MovieModel {
 
   factory MovieModel.fromMap(Map<String, dynamic> map) {
     return MovieModel(
-      id: map['id']?.toInt() ?? 0,
+      id: map['id'],
       title: map['title'] ?? '',
       releaseDate: map['release_date'] ?? '',
       posterPath: map['poster_path'] ?? '',
-      genres: List<int>.from(map['genres_ids'] ?? const []),
+      genres: List.from(map['genres_ids'] ?? const []),
       favorite: map['favorite'] ?? false,
     );
   }

@@ -18,7 +18,7 @@ class GenreModel {
 
   factory GenreModel.fromMap(Map<String, dynamic> map) {
     return GenreModel(
-      id: map['id']?.toInt() ?? 0,
+      id: map['id'],
       name: map['name'] ?? '',
     );
   }

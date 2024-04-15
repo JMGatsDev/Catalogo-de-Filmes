@@ -16,12 +16,12 @@ class MoviesRepositoryImpl implements MoviesRepository {
       query: {
         'api_key': FirebaseRemoteConfig.instance.getString('api_token'),
         'language': 'pt-br',
-        'page': 1
+        'page': '1'
       },
       decoder: (data) {
         final results = data['results'];
         if (results != null) {
-          return results.map((v) => MovieModel.fromMap(v)).toList();
+          return results.map<MovieModel>((v) => MovieModel.fromMap(v)).toList();
         }
         return <MovieModel>[];
       },
@@ -42,12 +42,12 @@ class MoviesRepositoryImpl implements MoviesRepository {
       query: {
         'api_key': FirebaseRemoteConfig.instance.getString('api_token'),
         'language': 'pt-br',
-        'page': 1
+        'page': '1'
       },
       decoder: (data) {
         final results = data['results'];
         if (results != null) {
-          return results.map((v) => MovieModel.fromMap(v)).toList();
+          return results.map<MovieModel>((v) => MovieModel.fromMap(v)).toList();
         }
         return <MovieModel>[];
       },
