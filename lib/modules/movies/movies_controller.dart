@@ -15,8 +15,8 @@ class MoviesController extends GetxController with MessagesMixin {
   final popularMovies = <MovieModel>[].obs;
   final topRatedMovies = <MovieModel>[].obs;
 
-  final _popularMoviesOriginal = <MovieModel>[].obs;
-  final _topRatedMoviesOriginal = <MovieModel>[].obs;
+  final _popularMoviesOriginal = <MovieModel>[];
+  final _topRatedMoviesOriginal = <MovieModel>[];
   MoviesController(
       {required MoviesService moviesService, required GenresServices genresServices})
       : _genresServices = genresServices,
