@@ -1,10 +1,11 @@
+import 'package:app_filmes/modules/movies/movies_controller.dart';
 import 'package:app_filmes/modules/movies/widgets/movies_filters.dart';
 import 'package:app_filmes/modules/movies/widgets/movies_grup.dart';
 import 'package:app_filmes/modules/movies/widgets/movies_header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MoviesPage extends StatelessWidget {
+class MoviesPage extends GetView<MoviesController> {
   const MoviesPage({super.key});
 
   @override
@@ -12,11 +13,14 @@ class MoviesPage extends StatelessWidget {
     return SizedBox(
       width: Get.width,
       child: ListView(
-        children: const [
+        children: [
           MoviesHeader(),
           MoviesFilters(),
-          MoviesGrup(title: 'Mais Populares',),
-          MoviesGrup(title: 'Top Filmes',),
+          MoviesGrup(title: 'Mais Populares', movies: controller.popularMovies),
+          MoviesGrup(
+            title: 'Top Filmes',
+            movies: controller.topRatedMovies,
+          ),
         ],
       ),
     );

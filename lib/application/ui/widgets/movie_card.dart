@@ -1,8 +1,10 @@
+import 'package:app_filmes/application/models/movie_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MovieCard extends StatelessWidget {
-  const MovieCard({super.key});
+  const MovieCard({super.key, required this.movie});
+  final MovieModel movie;
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +25,16 @@ class MovieCard extends StatelessWidget {
                   clipBehavior: Clip.antiAlias,
                   child: Image.network(
                     width: Get.width * 0.37,
-                    height: Get.height * 0.23,
+                    height: Get.height * 0.21,
                     fit: BoxFit.cover,
-                      "https://img.elo7.com.br/product/zoom/2A1A4BF/big-poster-filme-joker-coringa-joaquin-phoenix-lo02-90x60-cm-poster.jpg"),
+                      "https://image.tmdb.org/t/p/w500/${movie.posterPath}"),
                 ),
               ),
               SizedBox(
                 height: Get.height * 0.015,
               ),
-              const Text(
-                'Coringa ',
+               Text(
+                movie.title,
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
@@ -47,7 +49,7 @@ class MovieCard extends StatelessWidget {
             ],
           ),
           Positioned(
-            bottom: 50,
+            bottom: 65,
             right: -10,
             child: Material(
               elevation: 5,
