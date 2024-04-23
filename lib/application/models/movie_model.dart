@@ -29,11 +29,11 @@ class MovieModel {
 
   factory MovieModel.fromMap(Map<String, dynamic> map) {
     return MovieModel(
-      id: map['id'],
+      id: map['id']?? 0,
       title: map['title'] ?? '',
       releaseDate: map['release_date'] ?? '',
       posterPath: 'https://image.tmdb.org/t/p/w500${map['poster_path']}',
-      genres: List.from(map['genres_ids'] ?? const []),
+      genres: List<int>.from(map['genres_ids'] ?? const []),
       favorite: map['favorite'] ?? false,
     );
   }

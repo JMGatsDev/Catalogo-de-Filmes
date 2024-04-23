@@ -8,14 +8,15 @@ import 'package:get/get.dart';
 class MoviesController extends GetxController with MessagesMixin {
   final _message = Rxn<MessageModel>();
   final MoviesService _moviesService;
+  final GenresServices _genresServices;
 
   final genres = <GenreModel>[].obs;
-  final GenresServices _genresServices;
   final popularMovies = <MovieModel>[].obs;
   final topRatedMovies = <MovieModel>[].obs;
 
   var _popularMoviesOriginal = <MovieModel>[];
   var _topRatedMoviesOriginal = <MovieModel>[];
+
   final genreSelected = Rxn<GenreModel>();
 
   MoviesController(
@@ -55,13 +56,13 @@ class MoviesController extends GetxController with MessagesMixin {
 
   void filterByName(String title) {
     if (title.isNotEmpty) {
-      var newPopilarMovies = _popularMoviesOriginal.where((movie) {
+      var newPopularMovies = _popularMoviesOriginal.where((movie) {
         return movie.title.toLowerCase().contains(title.toLowerCase());
       });
       var newTopRatedMovies = _topRatedMoviesOriginal.where((movie) {
         return movie.title.toLowerCase().contains(title.toLowerCase());
       });
-      popularMovies.assignAll(newPopilarMovies);
+      popularMovies.assignAll(newPopularMovies);
       topRatedMovies.assignAll(newTopRatedMovies);
     } else {
       popularMovies.assignAll(_popularMoviesOriginal);
@@ -74,19 +75,23 @@ class MoviesController extends GetxController with MessagesMixin {
       genreModel = null;
     }
     genreSelected.value = genreModel;
-    
+
     if (genreModel != null) {
-      var newPopilarMovies = _popularMoviesOriginal.where((movie) {
+      var newPopularMovies = _popularMoviesOriginal.where((movie) {
         return movie.genres.contains(genreModel?.id);
       });
       var newTopRatedMovies = _topRatedMoviesOriginal.where((movie) {
         return movie.genres.contains(genreModel?.id);
       });
-      popularMovies.assignAll(newPopilarMovies);
+      popularMovies.assignAll(newPopularMovies);
       topRatedMovies.assignAll(newTopRatedMovies);
+      popularMovies.refresh();
+      topRatedMovies.refresh();
     } else {
       popularMovies.assignAll(_popularMoviesOriginal);
       topRatedMovies.assignAll(_topRatedMoviesOriginal);
+      popularMovies.refresh();
+      topRatedMovies.refresh();
     }
   }
 }
