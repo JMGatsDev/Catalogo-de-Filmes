@@ -5,10 +5,12 @@ import 'package:app_filmes/repository/movies/movies_repository.dart';
 import './movies_service.dart';
 
 class MoviesServiceImpl implements MoviesService {
+    final MoviesRepository _moviesRepository;
+
   MoviesServiceImpl({required MoviesRepository moviesRepository})
       : _moviesRepository = moviesRepository;
 
-  final MoviesRepository _moviesRepository;
+
 
   @override
   Future<List<MovieModel>> getPopularMovies() =>
