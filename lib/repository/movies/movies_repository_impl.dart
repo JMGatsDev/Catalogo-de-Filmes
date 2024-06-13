@@ -61,7 +61,7 @@ class MoviesRepositoryImpl implements MoviesRepository {
   @override
   Future<MovieDetailModel?> getDetail(int id) async {
     final result = await _restClient.get<MovieDetailModel?>(
-      'movie/$id',
+      '/movie/$id',
       query: {
         'api_key': FirebaseRemoteConfig.instance.getString('api_token'),
         'language': 'pt-br',
