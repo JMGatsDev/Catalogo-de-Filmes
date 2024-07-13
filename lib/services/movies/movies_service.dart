@@ -9,4 +9,8 @@ Future<List<MovieModel>> getPopularMovies();
 Future<List<MovieModel>> getTopRated();
 Future<MovieDetailModel?> getDetail(int id);
 
+Future<void> addOrRemoveFavorite(String userId, MovieModel movieModel) ;
+
+  Future<List<MovieModel>>getFavoritiesMovies(String userId);
+
 }

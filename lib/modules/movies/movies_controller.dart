@@ -1,3 +1,4 @@
+import 'package:app_filmes/application/auth/auth_service.dart';
 import 'package:app_filmes/application/models/genre_model.dart';
 import 'package:app_filmes/application/models/movie_model.dart';
 import 'package:app_filmes/application/ui/messages/messages_mixin.dart';
@@ -9,6 +10,7 @@ class MoviesController extends GetxController with MessagesMixin {
   final _message = Rxn<MessageModel>();
   final MoviesService _moviesService;
   final GenresServices _genresServices;
+  final AuthService _authService;
 
   final genres = <GenreModel>[].obs;
   final popularMovies = <MovieModel>[].obs;
@@ -21,9 +23,11 @@ class MoviesController extends GetxController with MessagesMixin {
 
   MoviesController(
       {required MoviesService moviesService,
-      required GenresServices genresServices})
+      required GenresServices genresServices,
+      required AuthService authService})
       : _genresServices = genresServices,
-        _moviesService = moviesService;
+        _moviesService = moviesService,
+        _authService = authService;
 
   @override
   void onInit() {
@@ -36,14 +40,9 @@ class MoviesController extends GetxController with MessagesMixin {
     super.onReady();
     try {
       final genresData = await _genresServices.getGenres();
-      final popularMoviesData = await _moviesService.getPopularMovies();
-      final topRatedMoviesData = await _moviesService.getTopRated();
-
       genres.assignAll(genresData);
-      popularMovies.assignAll(popularMoviesData);
-      _popularMoviesOriginal = popularMoviesData;
-      topRatedMovies.assignAll(topRatedMoviesData);
-      _topRatedMoviesOriginal = topRatedMoviesData;
+
+      await getMovies();
     } catch (e, s) {
       print(e);
       print(s);
@@ -52,6 +51,32 @@ class MoviesController extends GetxController with MessagesMixin {
             title: 'Erro: $e ', message: 'Erro ao Carregar Dados da pagina'),
       );
     }
+  }
+
+  Future<void> getMovies() async {
+    var popularMoviesData = await _moviesService.getPopularMovies();
+    var topRatedMoviesData = await _moviesService.getTopRated();
+    final favorites = await getFavorities();
+    popularMoviesData.map((m) {
+      if (favorites.containsKey(m.id)) {
+        return m.copyWith(favorite: true);
+      } else {
+        return m.copyWith(favorite: false);
+      }
+    }).toList();
+
+    topRatedMoviesData.map((m) {
+      if (favorites.containsKey(m.id)) {
+        return m.copyWith(favorite: true);
+      } else {
+        return m.copyWith(favorite: false);
+      }
+    }).toList();
+
+    popularMovies.assignAll(popularMoviesData);
+    _popularMoviesOriginal = popularMoviesData;
+    topRatedMovies.assignAll(topRatedMoviesData);
+    _topRatedMoviesOriginal = topRatedMoviesData;
   }
 
   void filterByName(String title) {
@@ -93,5 +118,34 @@ class MoviesController extends GetxController with MessagesMixin {
       popularMovies.refresh();
       topRatedMovies.refresh();
     }
+  }
+
+  Future<void> favoriteMovie(MovieModel movieModel) async {
+    final user = _authService.user;
+    if (user != null) {
+      var newMovie = movieModel.copyWith(favorite: !movieModel.favorite);
+      await _moviesService.addOrRemoveFavorite(user.uid, newMovie);
+      await getMovies();
+    }
+  }
+
+  Future<Map<int, MovieModel>> getFavorities() async {
+    var user = _authService.user;
+    if (user != null) {
+      final favorites = await _moviesService.getFavoritiesMovies(user.uid);
+      return <int, MovieModel>{for (var fav in favorites) fav.id: fav};
+    }
+    return {};
+  }
+
+  Future<Map<int, MovieModel>> getFavorites() async {
+    var user = _authService.user;
+    if (user != null) {
+      final favorites = await _moviesService.getFavoritiesMovies(user.uid);
+      return <int, MovieModel>{
+        for (var fav in favorites) fav.id: fav,
+      };
+    }
+    return {};
   }
 }
