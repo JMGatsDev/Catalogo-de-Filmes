@@ -22,7 +22,7 @@ class MovieDatailContentTitle extends StatelessWidget {
           ),
           Text(
             movieDetailModel?.title ?? '',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
           ),
           SizedBox(
             height: height * 0.005,

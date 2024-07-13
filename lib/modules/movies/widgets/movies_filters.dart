@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MoviesFilters extends GetView<MoviesController> {
-  const MoviesFilters({super.key});
+   const MoviesFilters({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 class MovieDetailHeader extends StatelessWidget {
   final MovieDetailModel? movieDetailModel;
 
-  MovieDetailHeader({
-    Key? key,
+  const MovieDetailHeader({
+    super.key,
     required this.movieDetailModel,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class MovieDetailHeader extends StatelessWidget {
           itemBuilder: (context, index) {
             final image = movieData.urlImages[index];
             return Padding(
-              padding: EdgeInsets.all(2),
+              padding: const EdgeInsets.all(2),
               child: Image.network(image),
             );
           },

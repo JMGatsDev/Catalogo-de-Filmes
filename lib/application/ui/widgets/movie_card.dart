@@ -1,18 +1,20 @@
 import 'package:app_filmes/application/models/movie_model.dart';
+import 'package:app_filmes/application/ui/theme_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class MovieCard extends StatelessWidget {
-  MovieCard({super.key, required this.movie});
+  MovieCard({super.key, required this.movie, required this.favoriteCallBack});
   final dateFormat = DateFormat('dd/MM/y');
   final MovieModel movie;
+  final VoidCallback favoriteCallBack;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed('/movie/detail',arguments: movie.id);
+        Get.toNamed('/movie/detail', arguments: movie.id);
       },
       child: Container(
         padding: const EdgeInsets.all(8),
@@ -33,7 +35,7 @@ class MovieCard extends StatelessWidget {
                         width: Get.width * 0.37,
                         height: Get.height * 0.21,
                         fit: BoxFit.cover,
-                        "https://image.tmdb.org/t/p/w500/${movie.posterPath}"),
+                        'https://image.tmdb.org/t/p/w200${movie.posterPath}'),
                   ),
                 ),
                 SizedBox(
@@ -65,11 +67,12 @@ class MovieCard extends StatelessWidget {
                   height: Get.height * 0.04,
                   child: IconButton(
                     iconSize: 13,
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.favorite,
-                      color: Colors.grey,
+                      color:
+                          movie.favorite == true ? context.ThemeRed : context.ThemeGrey,
                     ),
-                    onPressed: () {},
+                    onPressed: favoriteCallBack,
                   ),
                 ),
               ),

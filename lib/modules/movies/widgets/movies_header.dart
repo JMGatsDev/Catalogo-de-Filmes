@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MoviesHeader extends GetView<MoviesController> {
-  const MoviesHeader({super.key});
+   const MoviesHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
