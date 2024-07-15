@@ -57,7 +57,8 @@ class MoviesController extends GetxController with MessagesMixin {
     var popularMoviesData = await _moviesService.getPopularMovies();
     var topRatedMoviesData = await _moviesService.getTopRated();
     final favorites = await getFavorities();
-    popularMoviesData.map((m) {
+
+    popularMoviesData = popularMoviesData.map((m) {
       if (favorites.containsKey(m.id)) {
         return m.copyWith(favorite: true);
       } else {
@@ -65,7 +66,7 @@ class MoviesController extends GetxController with MessagesMixin {
       }
     }).toList();
 
-    topRatedMoviesData.map((m) {
+    topRatedMoviesData = topRatedMoviesData.map((m) {
       if (favorites.containsKey(m.id)) {
         return m.copyWith(favorite: true);
       } else {

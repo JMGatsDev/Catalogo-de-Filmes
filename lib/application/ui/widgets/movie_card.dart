@@ -19,7 +19,7 @@ class MovieCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(8),
         width: Get.width * 0.37,
-        height: Get.height * 0.30,
+        height: Get.height * 0.31,
         child: Stack(
           children: [
             Column(
@@ -68,9 +68,10 @@ class MovieCard extends StatelessWidget {
                   child: IconButton(
                     iconSize: 13,
                     icon: Icon(
-                      Icons.favorite,
-                      color:
-                          movie.favorite == true ? context.ThemeRed : context.ThemeGrey,
+                      movie.favorite ? Icons.favorite : Icons.favorite_border,
+                      color: movie.favorite == true
+                          ? context.ThemeRed
+                          : context.ThemeGrey,
                     ),
                     onPressed: favoriteCallBack,
                   ),
