@@ -106,7 +106,7 @@ class MoviesRepositoryImpl implements MoviesRepository {
   @override
   Future<List<MovieModel>> getFavoritiesMovies(String userId) async {
     var favoritesMovies = await FirebaseFirestore.instance
-        .collection('favorites')
+        .collection('favorities')
         .doc(userId)
         .collection('movies')
         .get();
