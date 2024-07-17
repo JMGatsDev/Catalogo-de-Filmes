@@ -3,6 +3,7 @@ import 'package:app_filmes/application/ui/theme_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class MovieCard extends StatelessWidget {
   MovieCard({super.key, required this.movie, required this.favoriteCallBack});
@@ -31,11 +32,12 @@ class MovieCard extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     clipBehavior: Clip.antiAlias,
-                    child: Image.network(
+                    child: FadeInImage.memoryNetwork(
+                      placeholder: kTransparentImage,                      
                         width: Get.width * 0.37,
                         height: Get.height * 0.21,
                         fit: BoxFit.cover,
-                        'https://image.tmdb.org/t/p/w200${movie.posterPath}'),
+                        image: 'https://image.tmdb.org/t/p/w200${movie.posterPath}'),
                   ),
                 ),
                 SizedBox(

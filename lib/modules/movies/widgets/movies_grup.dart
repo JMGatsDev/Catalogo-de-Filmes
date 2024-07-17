@@ -24,8 +24,9 @@ class MoviesGrup extends GetView<MoviesController> {
             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           SizedBox(
-              height: Get.height * 0.315,
-              child: Obx(() {
+            height: Get.height * 0.315,
+            child: Obx(() {
+              if (movies.isNotEmpty) {
                 return ListView.builder(
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
@@ -37,7 +38,14 @@ class MoviesGrup extends GetView<MoviesController> {
                           favoriteCallBack: () =>
                               controller.favoriteMovie(movie));
                     });
-              }),), //shrinkWrap Recalcula o tamanho do list
+              } else {
+                return Container(
+                  alignment: Alignment.center,
+                  child: Text('Nenhum Filmes encontrado'),
+                );
+              }
+            }),
+          ), //shrinkWrap Recalcula o tamanho do list
         ],
       ),
     );
